@@ -1,0 +1,63 @@
+extends layout
+
+block content
+    -var columns=8
+    -var selected = 'home'; //defaul
+    -var menu = { 'New place': '/list/new', 'Logout': '/logout'};
+    -var hello = 'Hello ' + username
+    h1= title
+    h4= hello
+    
+    body
+    nav
+      ul
+        each val, key in menu
+          li
+            if selected === key
+              a.selected(href=val, title=key)= key
+            else
+              a(href=val, title=key)= key
+    
+    .table-responsive
+        table(
+            class='table table-bordered table-striped'
+        )
+            thead
+                tr
+                    th Actions
+                    th Name
+                    th(
+                        style="text-align:center"
+                    ) Sara's Ranking
+                    th(
+                        style="text-align:center"
+                    ) Todd's Ranking
+                    th Created By
+                    th Updated By
+                    th Date Added
+                    th Date Updated
+            tbody
+                each place in places
+                    tr
+                        td
+                            a(
+                                href='/list/edit/' + place.id
+                            ) Edit
+                            = '  '
+                            a(
+                                href='/list/delete/' + place.id
+                            ) Delete
+                        td= place.name
+                        td(
+                            align='center'
+                        )= place.rank1
+                        td(
+                            align='center'
+                        )= place.rank2
+                        td= place.created_by_username
+                        td= place.updated_by_username
+                        td= moment(place.date_added).format('MM/DD/YYYY h:mm a')
+                        td= place.date_updated ? moment(place.date_updated).format('MM/DD/YYYY h:mm a') : ''
+                else
+                    tr
+                        td(colspan=columns) No Current Places

@@ -1,0 +1,27 @@
+{
+  "name": "PlaceList",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "body-parser": "~1.13.2",
+    "connect-redis": "^3.1.0",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "express-session": "^1.14.2",
+    "moment": "^2.15.2",
+    "morgan": "~1.6.1",
+    "node-mysql": "^0.4.2",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pg": "^6.1.0",
+    "pug": "^2.0.0-beta6",
+    "serve-favicon": "~2.3.0",
+    "validator": "^6.1.0",
+    "validator-js": "^0.2.1"
+  }
+}

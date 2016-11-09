@@ -1,0 +1,9 @@
+{
+  "dependencies": {},
+  "globalDependencies": {
+    "express": "registry:dt/express#4.0.0+20160708185218",
+    "passport-local": "registry:dt/passport-local#0.0.0+20160316155526",
+    "pg": "registry:dt/pg#6.1.0+20161019122652",
+    "validator": "registry:dt/validator#5.7.0+20161105193831"
+  }
+}

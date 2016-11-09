@@ -1,0 +1,79 @@
+extends layout
+
+block content
+    h1 #{title}
+    
+    - var formAction = '/list/save'
+    
+    case action
+        when 'update'
+            - formAction = '/list/save/' + place.id
+
+        when 'delete' 
+            - formAction = '/list/delete/' + place.id
+
+    if place
+        - var name = place.name
+        - var rank1 = place.rank1
+        - var rank2 = place.rank2
+
+    if messages
+        div
+            ul
+                each message in messages
+                    li= message
+
+    form(action=formAction, method='post')
+        .table-responsive
+            .table
+                tr
+                    td
+                        .form-group
+                            | <strong>Place</strong>
+                            input(
+                                class= 'form-control'
+                                type= 'text'
+                                name= 'name'
+                                value= name
+                            )
+                tr
+                    td
+                        .form-group
+                            | <strong>Sara's Ranking</strong>
+                            input(
+                                class= 'form-control'
+                                type= 'text'
+                                name= 'rank1'
+                                value= rank1 ? rank1 : 0
+                            )
+                tr
+                    td
+                        .form-group
+                            | <strong>Todd's Ranking</strong>
+                            input(
+                                class= 'form-control'
+                                type= 'text'
+                                name= 'rank2'
+                                value= rank2 ? rank2 : 0
+                            )
+                tr
+                    td
+                        .form-group
+                            case action
+                                when 'update'
+                                when 'create'
+                                    input(
+                                        type= 'submit'
+                                        class= 'btn btn-default'
+                                        value= 'Save'
+                                    )
+                                when 'delete'
+                                    input(
+                                        type= 'submit'
+                                        class= 'btn btn-danger'
+                                        value= 'Delete'
+                                    )
+                            = '  '
+                            a(
+                                href= '/list'
+                            ) Back to List
