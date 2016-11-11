@@ -45,7 +45,12 @@ function renderList(req, res) {
     });
 }
 
-function renderNew(req, res, next, messages = []) {
+function renderNew(req, res, next) {
+    var place = { name: req.body.name, rank1: req.body.rank1, rank2: req.body.rank2 }
+    res.render('newplace', { title: 'New Place', action: 'create', place: place });
+}
+
+function renderNewWithMessages(req, res, messages) {
     var place = { name: req.body.name, rank1: req.body.rank1, rank2: req.body.rank2 }
     res.render('newplace', { title: 'New Place', action: 'create', place: place, messages: messages });
 }
@@ -96,7 +101,7 @@ function createPlace(req, res, next) {
         messages.push('\nRank must be between 0 and 10')    
     }
     if (messages.length > 0) {
-        renderNew(req, res, next, messages);
+        renderNewWithMessages(req, res, next, messages);
         return
     }
 
