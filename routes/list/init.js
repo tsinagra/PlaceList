@@ -3,10 +3,10 @@ var validator = require('validator');
 
 var mysql      = require('mysql');
 var con = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'j4414rdw',
-  database : 'placelist'
+  host     : '172.30.101.38',
+  user     : 'user7KP',
+  password : '4yjqIOWhUtUmwiU6',
+  database : 'sampledb'
 })
 con.connect();
 
