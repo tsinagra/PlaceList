@@ -55,7 +55,17 @@ function renderNewWithMessages(req, res, messages) {
     res.render('newplace', { title: 'New Place', action: 'create', place: place, messages: messages });
 }
 
-function renderPlace(req, res, next, messages = []) {
+function renderPlace(req, res, next) {
+    getPlaceById(req.params.id, function(err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('newplace', { title: 'Edit Place', place: result, action: 'update' });
+        }
+    });
+}
+
+function renderPlaceWithMessages(req, res, messages) {
     getPlaceById(req.params.id, function(err, result) {
         if (err) {
             console.log(err);
