@@ -2,6 +2,7 @@ const passport = require('passport')
 var validator = require('validator');
 
 var monk = require('monk');
+// var db = monk('localhost:27017/ourplaces')
 var db = monk('user3IT:WEeVVlVVo3CRqInr@10.1.48.4:27017/sampledb')
 
 function initUser (app) {

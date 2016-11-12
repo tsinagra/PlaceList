@@ -4,6 +4,7 @@ const authenticationMiddleware = require('./middleware')
 const bcrypt = require('bcrypt');
 
 var monk = require('monk');
+// var db = monk('localhost:27017/ourplaces')
 var db = monk('user3IT:WEeVVlVVo3CRqInr@10.1.48.4:27017/sampledb')
 
 function findUser (username, callback) {
@@ -19,6 +20,7 @@ function findUser (username, callback) {
 }
 
 passport.serializeUser(function (user, cb) {
+    console.log(user)
     cb(null, user.userName)
 })
 
