@@ -7,15 +7,15 @@ block content
     
     case action
         when 'update'
-            - formAction = '/list/save/' + place.id
+            - formAction = '/list/save/' + place._id
 
         when 'delete' 
-            - formAction = '/list/delete/' + place.id
+            - formAction = '/list/delete/' + place._id
 
     if place
         - var name = place.name
-        - var rank1 = place.rank1
-        - var rank2 = place.rank2
+        - var saraRating = place.saraRating
+        - var toddRating = place.toddRating
 
     if messages
         div
@@ -43,8 +43,8 @@ block content
                             input(
                                 class= 'form-control'
                                 type= 'text'
-                                name= 'rank1'
-                                value= rank1 ? rank1 : 0
+                                name= 'saraRating'
+                                value= saraRating ? saraRating : 0
                             )
                 tr
                     td
@@ -53,8 +53,8 @@ block content
                             input(
                                 class= 'form-control'
                                 type= 'text'
-                                name= 'rank2'
-                                value= rank2 ? rank2 : 0
+                                name= 'toddRating'
+                                value= toddRating ? toddRating : 0
                             )
                 tr
                     td

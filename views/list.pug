@@ -5,6 +5,7 @@ block content
     -var selected = 'home'; //defaul
     -var menu = { 'New place': '/list/new', 'Logout': '/logout'};
     -var hello = 'Hello ' + username
+
     h1= title
     h4= hello
     
@@ -28,10 +29,10 @@ block content
                     th Name
                     th(
                         style="text-align:center"
-                    ) Sara's Ranking
+                    ) Sara's Rating
                     th(
                         style="text-align:center"
-                    ) Todd's Ranking
+                    ) Todd's Rating
                     th Created By
                     th Updated By
                     th Date Added
@@ -41,23 +42,23 @@ block content
                     tr
                         td
                             a(
-                                href='/list/edit/' + place.id
+                                href='/list/edit/' + place._id
                             ) Edit
                             = '  '
                             a(
-                                href='/list/delete/' + place.id
+                                href='/list/delete/' + place._id
                             ) Delete
                         td= place.name
                         td(
                             align='center'
-                        )= place.rank1
+                        )= place.saraRating
                         td(
                             align='center'
-                        )= place.rank2
-                        td= place.created_by_username
-                        td= place.updated_by_username
-                        td= moment(place.date_added).format('MM/DD/YYYY h:mm a')
-                        td= place.date_updated ? moment(place.date_updated).format('MM/DD/YYYY h:mm a') : ''
+                        )= place.toddRating
+                        td= place.createdBy
+                        td= place.updatedBy
+                        td= moment(place.createdDate).format('MM/DD/YYYY h:mm a')
+                        td= place.updatedDate ? moment(place.updatedDate).format('MM/DD/YYYY h:mm a') : ''
                 else
                     tr
                         td(colspan=columns) No Current Places
