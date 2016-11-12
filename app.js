@@ -39,7 +39,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
     store: new RedisStore(),
-    secret: 'keyboard cat'
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
 }));
 
 app.use(passport.initialize())  
