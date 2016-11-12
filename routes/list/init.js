@@ -2,7 +2,7 @@ const passport = require('passport')
 var validator = require('validator');
 
 var monk = require('monk');
-var db = monk('localhost:27017/ourplaces');
+var db = monk('10.1.48.4:27017/sampledb');
 
 function initUser (app) {
     app.get('/', renderLogin)
