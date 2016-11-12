@@ -10,7 +10,7 @@ function findUser (username, callback) {
     var collection = db.get('users');
     collection.findOne({ userName: username }, function(err, user) {
         if (err) {
-            console.log('Error while performing Query.');
+            console.log('error fetching user');
             callback(null)
         } else {
             callback(null, user)
@@ -31,16 +31,20 @@ function initPassport () {
         function(username, password, done) {
           findUser(username, function (err, user) {
             if (err) {
+                console.log(err);
               return done(err)
             }
             if (!user) {
-              return done(null, false)
+                console.log('unable to find user')
+                return done(null, false)
             }
             bcrypt.compare(password, user.password, function(err, res) {
                 // res == true
                 if (res) {
+                    console.log('passswords match')
                     return done(null, user)
                 } else {
+                    console.log('passswords mismatch')
                     return done(null, false)
                 }
             })
