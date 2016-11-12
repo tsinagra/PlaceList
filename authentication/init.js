@@ -3,38 +3,23 @@ const LocalStrategy = require('passport-local').Strategy
 const authenticationMiddleware = require('./middleware')
 const bcrypt = require('bcrypt');
 
-var mysql      = require('mysql');
-var con = mysql.createConnection({
-  host     : '10.1.76.25',
-  user     : 'user7KP',
-  password : '4yjqIOWhUtUmwiU6',
-  database : 'sampledb'
-})
-con.connect();
-
-const user = {
-  username: 'sara',
-  password: 'password',
-  id: 1
-}
+var monk = require('monk');
+var db = monk('localhost:27017/ourplaces');
 
 function findUser (username, callback) {
-    con.query(
-        'SELECT * FROM users where username = ?',
-        [username],
-        function(err, rows, fields) {
-            if (err) {
-                console.log('Error while performing Query.');
-                callback(null)
-            } else {
-                callback(null, rows[0])
-            }
-        } 
-    )
+    var collection = db.get('users');
+    collection.findOne({ userName: username }, function(err, user) {
+        if (err) {
+            console.log('Error while performing Query.');
+            callback(null)
+        } else {
+            callback(null, user)
+        }
+    });
 }
 
 passport.serializeUser(function (user, cb) {
-    cb(null, user.username)
+    cb(null, user.userName)
 })
 
 passport.deserializeUser(function (username, cb) {
