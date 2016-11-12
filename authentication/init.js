@@ -4,7 +4,7 @@ const authenticationMiddleware = require('./middleware')
 const bcrypt = require('bcrypt');
 
 var monk = require('monk');
-var db = monk('user3IT:WEeVVlVVo3CRqInr@172.31.2.77:27017/sampledb')
+var db = monk('user3IT:WEeVVlVVo3CRqInr@10.1.48.4:27017/sampledb')
 
 function findUser (username, callback) {
     var collection = db.get('users');
