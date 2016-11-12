@@ -20,11 +20,12 @@ function findUser (username, callback) {
 }
 
 passport.serializeUser(function (user, cb) {
-    console.log(user)
+    console.log('serializeUser: ' + user.userName)
     cb(null, user.userName)
 })
 
 passport.deserializeUser(function (username, cb) {
+    console.log('deserializeUser: ' + username)
     findUser(username, cb)
 })
 
