@@ -7,7 +7,7 @@ var db = monk('user3IT:WEeVVlVVo3CRqInr@10.1.48.4:27017/sampledb')
 
 function initUser (app) {
     app.get('/', renderLogin)
-    app.get('/list', passport.authenticationMiddleware(), renderList)
+    app.get('/login', renderLogin)
         
     app.post('/login', passport.authenticate('local', {
         successRedirect: '/list',
@@ -15,6 +15,11 @@ function initUser (app) {
     }))
 
     app.get('/logout', logoutUser)
+    
+    // app.get('/list', passport.authenticationMiddleware(), renderList)
+    app.get('/list', require('connect-ensure-login').ensureLoggedIn(), renderList)
+
+
     app.get('/list/new', passport.authenticationMiddleware(), renderNew)
     app.post('/list/save', passport.authenticationMiddleware(), createPlace)
     app.post('/list/save/:id', passport.authenticationMiddleware(), savePlace)   
