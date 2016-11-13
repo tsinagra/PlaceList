@@ -1,10 +1,11 @@
 extends layout
 
 block content
+
     -var columns=8
     -var selected = 'home'; //defaul
     -var menu = { 'New place': '/list/new', 'Logout': '/logout'};
-    -var hello = 'Hello ' + username
+    -var hello = 'Hello ' + username        
 
     h1= title
     h4= hello
@@ -21,11 +22,14 @@ block content
     
     .table-responsive
         table(
+            id='sort',
             class='table table-bordered table-striped'
         )
             thead
                 tr
-                    th Actions
+                    th(
+                        class='no-sort'
+                    ) Actions
                     th Name
                     th(
                         style="text-align:center"
@@ -62,3 +66,7 @@ block content
                 else
                     tr
                         td(colspan=columns) No Current Places
+
+    script(src="/javascripts/tablesort.min.js")
+    script.
+        new Tablesort(document.getElementById('sort'));
