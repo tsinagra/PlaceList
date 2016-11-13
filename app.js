@@ -41,6 +41,7 @@ var mongoURL = process.env.MONGODB_DB_URL || process.env.MONGO_URL
 if (mongoURL == null) {
   var mongoURL = 'mongodb://localhost:27017/ourplaces'
 }
+console.log('App MongoURL: ' + mongoURL)
 
 app.use(session({
   secret: 'secrettexthere',
