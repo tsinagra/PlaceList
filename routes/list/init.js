@@ -16,8 +16,8 @@ function initUser (app) {
 
     app.get('/logout', logoutUser)
     
-    // app.get('/list', passport.authenticationMiddleware(), renderList)
-    app.get('/list', require('connect-ensure-login').ensureLoggedIn(), renderList)
+    app.get('/list', passport.authenticationMiddleware(), renderList)
+    // app.get('/list', require('connect-ensure-login').ensureLoggedIn(), renderList)
 
 
     app.get('/list/new', passport.authenticationMiddleware(), renderNew)

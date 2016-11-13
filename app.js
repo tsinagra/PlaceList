@@ -18,7 +18,7 @@ bcrypt.genSalt(saltRounds, function(err, salt) {
     });
 });
 
-var config = require('./config')
+// var config = require('./config')
 
 var app = express();
 app.locals.moment = require('moment');
