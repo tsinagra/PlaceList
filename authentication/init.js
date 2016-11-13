@@ -4,8 +4,12 @@ const authenticationMiddleware = require('./middleware')
 const bcrypt = require('bcrypt');
 
 var monk = require('monk');
-// var db = monk('mongodb://localhost:27017/ourplaces')
-var db = monk('user3IT:WEeVVlVVo3CRqInr@10.1.48.4:27017/sampledb')
+
+var mongoURL = process.env.MONGODB_DB_URL || process.env.MONGO_URL
+if (mongoURL == null) {
+  var mongoURL = 'mongodb://localhost:27017/ourplaces'
+}
+var db = monk(mongoURL)
 
 function findUser (username, callback) {
     var collection = db.get('users');

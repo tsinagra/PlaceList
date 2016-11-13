@@ -2,8 +2,12 @@ const passport = require('passport')
 var validator = require('validator');
 
 var monk = require('monk');
-// var db = monk('mongodb://localhost:27017/ourplaces')
-var db = monk('user3IT:WEeVVlVVo3CRqInr@10.1.48.4:27017/sampledb')
+
+var mongoURL = process.env.MONGODB_DB_URL || process.env.MONGO_URL
+if (mongoURL == null) {
+  var mongoURL = 'mongodb://localhost:27017/ourplaces'
+}
+var db = monk(mongoURL)
 
 function initUser (app) {
     app.get('/', renderLogin)
@@ -15,11 +19,7 @@ function initUser (app) {
     }))
 
     app.get('/logout', logoutUser)
-    
     app.get('/list', passport.authenticationMiddleware(), renderList)
-    // app.get('/list', require('connect-ensure-login').ensureLoggedIn(), renderList)
-
-
     app.get('/list/new', passport.authenticationMiddleware(), renderNew)
     app.post('/list/save', passport.authenticationMiddleware(), createPlace)
     app.post('/list/save/:id', passport.authenticationMiddleware(), savePlace)   

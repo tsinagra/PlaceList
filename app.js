@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport')  
 var session = require('express-session')  
-var RedisStore = require('connect-redis')(session)
 const MongoStore = require('connect-mongo')(session);
 
 var bcrypt = require('bcrypt');
@@ -38,15 +37,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(session({
-//     store: new RedisStore(),
-//     secret: 'keyboard cat',
-//     resave: true,
-//     saveUninitialized: true
-// }));
-
-// var mongoUrl = 'mongodb://localhost:27017/ourplaces'
-var mongoUrl = 'mongodb://user3IT:WEeVVlVVo3CRqInr@10.1.48.4:27017/sampledb'
+var mongoURL = process.env.MONGODB_DB_URL || process.env.MONGO_URL
+if (mongoURL == null) {
+  var mongoURL = 'mongodb://localhost:27017/ourplaces'
+}
 
 app.use(session({
   secret: 'secrettexthere',
@@ -54,7 +48,7 @@ app.use(session({
   resave: true,
   // using store session on MongoDB using express-session + connect
   store: new MongoStore({
-    url: mongoUrl,
+    url: mongoURL,
     collection: 'sessions'
   })
 }));
