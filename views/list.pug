@@ -3,8 +3,6 @@ extends layout
 block content
 
     -var columns=8
-    -var selected = 'home'; //defaul
-    -var menu = { 'New place': '/list/new', 'Logout': '/logout'};
     -var hello = 'Hello ' + username        
 
     h1= title
@@ -13,13 +11,14 @@ block content
     body
     nav
       ul
-        each val, key in menu
-          li
-            if selected === key
-              a.selected(href=val, title=key)= key
-            else
-              a(href=val, title=key)= key
-    
+        li 
+            span(class='glyphicon glyphicon-plus')
+            = ' '
+            a(hef='/list/new', title='New Place') New Place
+        li 
+            span(class='glyphicon glyphicon-log-out')
+            = '  '
+            a(hef='/logout', title='Logout') Logout    
     .table-responsive
         table(
             id='sort',
@@ -32,9 +31,11 @@ block content
                     ) Actions
                     th Name
                     th(
+                        data-sort-method='number',
                         style="text-align:center"
                     ) Sara's Rating
                     th(
+                        data-sort-method='number',
                         style="text-align:center"
                     ) Todd's Rating
                     th Created By
@@ -45,10 +46,18 @@ block content
                 each place in places
                     tr
                         td
+                            span(
+                                class='glyphicon glyphicon-pencil'
+                            )
+                            =' '
                             a(
                                 href='/list/edit/' + place._id
                             ) Edit
                             = '  '
+                            span(
+                                class='glyphicon glyphicon-remove'
+                            )
+                            = ' '
                             a(
                                 href='/list/delete/' + place._id
                             ) Delete
@@ -67,6 +76,7 @@ block content
                     tr
                         td(colspan=columns) No Current Places
 
-    script(src="/javascripts/tablesort.min.js")
+    script(src='/javascripts/tablesort.min.js')
+    script(src='/javascripts/tablesort.number.js')
     script.
         new Tablesort(document.getElementById('sort'));
