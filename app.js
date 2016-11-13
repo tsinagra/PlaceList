@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport')  
 var session = require('express-session')  
 var RedisStore = require('connect-redis')(session)
+const MongoStore = require('connect-mongo')(session);
 
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -37,11 +38,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// app.use(session({
+//     store: new RedisStore(),
+//     secret: 'keyboard cat',
+//     resave: true,
+//     saveUninitialized: true
+// }));
+
+// var mongoUrl = 'mongodb://localhost:27017/ourplaces'
+var mongoUrl = 'mongodb://user3IT:WEeVVlVVo3CRqInr@10.1.48.4:27017/sampledb'
+
 app.use(session({
-    store: new RedisStore(),
-    secret: 'keyboard cat',
-    resave: true,
-    saveUninitialized: true
+  secret: 'secrettexthere',
+  saveUninitialized: true,
+  resave: true,
+  // using store session on MongoDB using express-session + connect
+  store: new MongoStore({
+    url: mongoUrl,
+    collection: 'sessions'
+  })
 }));
 
 app.use(passport.initialize())  
