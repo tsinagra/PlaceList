@@ -43,6 +43,9 @@ if (mongoURL == null) {
 }
 console.log('App MongoURL: ' + mongoURL)
 
+app.locals.ucfirst = function(value){
+    return value.charAt(0).toUpperCase() + value.slice(1);
+};
 app.use(session({
   secret: 'secrettexthere',
   saveUninitialized: true,

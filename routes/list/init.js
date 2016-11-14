@@ -40,9 +40,8 @@ function logoutUser(req, res) {
 }
 
 function renderList(req, res) {
-    var username = req.user.userName.charAt(0).toUpperCase() + req.user.userName.slice(1).toLowerCase();
     allPlaces(function(err, results) {
-        res.render('list', {title: 'List', places: results, username: username });
+        res.render('list', {title: 'List', places: results, username: req.user.userName });
     });
 }
 

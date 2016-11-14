@@ -3,7 +3,7 @@ extends layout
 block content
 
     -var columns=8
-    -var hello = 'Hello ' + username        
+    -var hello = 'Hello ' + ucfirst(username)        
 
     h1= title
     h4= hello
@@ -68,8 +68,8 @@ block content
                         td(
                             align='center'
                         )= place.toddRating
-                        td= place.createdBy
-                        td= place.updatedBy
+                        td #{ucfirst(place.createdBy)}
+                        td= place.updatedDate ? ucfirst(place.updatedBy) : ''
                         td= moment(place.createdDate).format('MM/DD/YYYY h:mm a')
                         td= place.updatedDate ? moment(place.updatedDate).format('MM/DD/YYYY h:mm a') : ''
                 else
